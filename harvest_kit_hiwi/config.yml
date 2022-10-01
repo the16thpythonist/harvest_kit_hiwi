@@ -1,0 +1,50 @@
+# CONFIGURE HARVEST API ACCESS
+harvest:
+    # This should be the url for YOUR PERSONAL api access point.
+    api_url: 'https://[yourname].harvestapp.com/api/v2/'
+
+    # Account ID and the API TOKEN are very personal information. Insert them here but do not share
+    # publicly! You can find them in the Harvest Settings menu.
+    account_id: null
+    account_token: null
+
+    # The way harvest is set up is that there is one *project* entirely dedicated for the hiwi time tracking
+    # you need to find out the ID of that project and insert it here. The program will use this to only
+    # retrieve the time entries related to that project.
+    # To find out this project ID use the "show_projects" command that ist also provided by this package!
+    project_id: '34329740'
+
+# CONFIGURE YOUR PERSONAL INFORMATION
+personal:
+    # Name
+    name: 'Jonas Teufel'
+    # Personalnummer
+    personnel_number: '1982907'
+    institute: 'Institut für Theoretische Informatik (ITI)'
+    # Your monthly working hours from the contract
+    working_hours: 50
+    # Your hourly rate (in euros) from the contract
+    hourly_rate: 12.5
+    # Your allowed leave/vacation time in hours PER MONTH (can be a float)
+    monthly_leave: 4
+
+# CONFIGURE HOW THIS PROGRAM SHOULD FUNCTION
+function:
+    # If active, all the harvest time entries for the same day will be merged into a single entry for the
+    # of the final table of the document. Durations will be added up and descriptions are concatenated.
+    # This is strongly encouraged due to the limited size of the document.
+    merge_daily: true
+
+    # If active, all additional working hours which exceed the given monthly working time will be clipped
+    # aka discarded so that the documentation comes out to the perfect amount.
+    # Otherwise, the additional hours will be added via carry over to the next month
+    clip_overtime: true
+
+    # If active, working time on holidays / sundays will automatically be fixed, which means that they will
+    # be moved to the next available date which is not a holiday.
+    fix_holidays: true
+
+    # Every Hiwi has a certain amount of "leave/vacation" that they HAVE TO use. If active, this will
+    # automatically add just the right amount of leave for every month such that all leave is fully
+    # utilized.
+    monthly_leave: true

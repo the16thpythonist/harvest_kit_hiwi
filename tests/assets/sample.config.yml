@@ -1,0 +1,14 @@
+harvest:
+    api_url: 'some api'
+    account_id: 'your id'
+    account_token: 'your token'
+
+personal:
+    name: 'your name'
+    personnel_number: '1982907'
+    institute: 'KIT'
+    working_hours: '40h'
+    hourly_rate: '10.0'
+
+functionality:
+    fix_collisions: true
