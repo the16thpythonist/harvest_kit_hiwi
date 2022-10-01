@@ -16,8 +16,9 @@ Harvest Time Tracking + KIT HiWi Arbeitszeitdokumentation
 Automatically export the time you tracked with Harvest_ online time tracking tool as a KIT HiWi
 Arbeitszeit Dokumentation (AZD)!
 
-Doing the AZD can be tedious, especially if you're really bad at manual time tracking :smile: . So why
-spend half an hour *every month* if I have just spent 10 hours automating the whole process for you!
+Doing the AZD can be tedious, especially if you're really bad at manual time tracking :flushed: . So why
+spend half an hour *every month* if I have just spent 10 hours automating the whole process for you
+:no_mouth:!
 
 Harvest_ is a free online tool to keep track of your time. Without spending any money you get 2 free
 projects, access on multiple devices and full REST API functionality. This package uses the Harvest REST API
@@ -39,23 +40,23 @@ Features
 Usage
 -----
 
-(1) Clone this repo
+**1.** Clone this repo
 
 .. code-block:: shell
 
     git clone https://github.com/the16thpythonist/harvest_kit_hiwi.git
 
-(2) Install via ``pip``:
+**2.** Install via ``pip``:
 
 .. code-block:: shell
 
     cd harvest_kit_hiwi
     pip3 install -e .
 
-(3) Insert your Harvest account details and your personal information into the config file at
+**3.** Insert your Harvest account details and your personal information into the config file at
 ``harvest_kit_hiwi/harvest_kit_hiwi/config.yml``
 
-(4) Use the command line interface to generate your document
+**4.** Use the command line interface to generate your document
 
 .. code-block:: shell
 
