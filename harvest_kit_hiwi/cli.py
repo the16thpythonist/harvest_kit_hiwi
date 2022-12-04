@@ -5,6 +5,7 @@ import click
 import json
 import datetime
 from collections import defaultdict
+from pprint import pprint
 
 import cairosvg
 
@@ -14,6 +15,19 @@ from harvest_kit_hiwi.config import CONFIG
 from harvest_kit_hiwi.harvest import HarvestApi
 from harvest_kit_hiwi.processing import TimeSpan, ArbeitszeitData
 from harvest_kit_hiwi.document import create_azd_svg
+
+
+CHECK_MARK = '✓'
+
+
+def echo_info(content: str, verbose: bool = True):
+    if verbose:
+        click.secho(f'... {content}')
+
+
+def echo_success(content: str, verbose: bool = True):
+    if verbose:
+        click.secho(f'[{CHECK_MARK}] {content}')
 
 
 @click.group('hhiwi', invoke_without_command=True)
@@ -114,15 +128,15 @@ def azd(month: str,
         total_time_delta += ts.time_delta
 
     total_working_seconds = int(CONFIG.get_working_hours() * 3600)
-    total_difference_minutes = total_time_delta.total_seconds() - total_working_seconds - leave * 3600
-    if CONFIG.do_clip_hours() and total_difference_minutes > 0:
-        # To do this we will simply remove an equal amount of time from all the currently registered
-        # time spans
-        individual_remove_minutes = int(total_difference_minutes / len(time_spans))
-        for ts in time_spans:
-            ts.modify_end(-individual_remove_minutes * 60)
+    total_difference_seconds = total_time_delta.total_seconds() - (total_working_seconds - leave * 3600)
+    echo_info(f'overtime this month: {total_difference_seconds / 3600:.1f} hrs')
+    if CONFIG.do_clip_hours() and total_difference_seconds > 0:
 
-    carry_over = -total_difference_minutes
+        for i, ts in enumerate(time_spans):
+            contributing_ratio = ts.time_delta.total_seconds() / total_time_delta.total_seconds()
+            ts.modify_end(-(total_difference_seconds * contributing_ratio))
+
+    carry_over = -total_difference_seconds
     click.secho(f'calculated carry over of {carry_over:.2f} seconds ({carry_over / 3600:.2f} hrs)')
 
     # Finally, we need to order this list by the starting time to list the time spans in chronological

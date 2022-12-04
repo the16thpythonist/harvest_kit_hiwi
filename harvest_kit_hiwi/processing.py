@@ -60,6 +60,7 @@ class TimeSpan:
     def __str__(self):
         return (f'TimeSpan(start={self.start_datetime}, '
                 f'end={self.end_datetime}, '
+                f'duration={self.duration}, '
                 f'descriptions="{self.description}")')
 
     def __add__(self, other):

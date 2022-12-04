@@ -1,4 +1,5 @@
 import os
+import math
 import pathlib
 import datetime
 
@@ -30,12 +31,12 @@ def get_version():
 
 def timedelta_string(time_delta: datetime.timedelta,
                      clip_seconds: bool = True) -> str:
-    string = str(time_delta)
+    total_seconds = time_delta.total_seconds()
 
-    if clip_seconds:
-        string = string[:-3]
+    hours = math.floor(total_seconds / 3600)
+    total_seconds -= hours * 3600
 
-    if string[0] != '0':
-        string = '0' + string
+    minutes = math.floor(total_seconds / 60)
+    total_seconds -= minutes * 60
 
-    return string
+    return f'{hours:02d}:{minutes:02d}'
